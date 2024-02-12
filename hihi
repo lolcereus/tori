@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Proposal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            overflow: hidden;
+            background: url('https://scontent.ford4-1.fna.fbcdn.net/v/t1.15752-9/428028878_311489295229687_6873306437121837781_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=ak5NzK4r5CcAX_WhJ4u&_nc_oc=AQkirqLJaofbJijc30R-yZtx8xhF744ZAHpzN3vspwKg1dDmX7LyIyN0wgFgnaNwDbc&_nc_ht=scontent.ford4-1.fna&oh=03_AdRoyFJ4PZKDbsNIl4IVlrEDTgojjpfd1sQPL12qifGBhg&oe=65F1FB48') repeat;
+            background-size: 20%; /* Resize the background image to be 20% of the viewport size */
+            margin: 0;
+            height: 100vh;
+        }
+
+        #proposal {
+            margin-top: 10%;
+            background-color: rgba(255, 192, 203, 0.8); /* Light Pink with Opacity */
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        #yesButton, #noButton {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            position: relative;
+        }
+
+        #yayText {
+            display: none;
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffcc00; /* Yellow */
+        }
+
+        .falling-effect {
+            position: absolute;
+            width: 150px; /* Adjust the size as needed */
+            height: 150px; /* Adjust the size as needed */
+            animation: fallAnimation linear infinite;
+            background: url('https://i.pinimg.com/originals/db/6d/5c/db6d5ce75208eabbc87b564eafcbdaa8.png') no-repeat center/contain; /* Falling picture link */
+            z-index: 1; /* Set z-index to 1 to appear in front of the GIFs */
+        }
+
+        .gif-effect {
+            position: absolute;
+            width: 350px; /* Set the width of the GIF */
+            height: 350px; /* Set the height of the GIF */
+            z-index: 2; /* Set z-index to 2 to appear behind the falling pictures */
+        }
+
+        @keyframes fallAnimation {
+            0% {
+                transform: translateY(-50vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(50vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="proposal" class="col-md-8 mx-auto">
+            <h1 class="text-white" id="questionText">Hey Tori, will you be my Valentine?</h1>
+            <button id="yesButton" class="btn btn-success" onclick="showCelebrate()">Yes</button>
+            <button id="noButton" class="btn btn-danger" onclick="moveNoButton()">No</button>
+            <div id="yayText" class="text-white">YAAYYYYYYYYYY</div>
+        </div>
+        <div id="outsideGifs" class="position-absolute"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function moveNoButton() {
+            var noButton = document.getElementById('noButton');
+            var proposalDiv = document.getElementById('proposal');
+            var proposalRect = proposalDiv.getBoundingClientRect();
+
+            noButton.style.left = Math.random() * (proposalRect.width - noButton.offsetWidth) + 'px';
+            noButton.style.top = Math.random() * (proposalRect.height - noButton.offsetHeight) + 'px';
+        }
+
+        function showCelebrate() {
+            var proposalDiv = document.getElementById('proposal');
+            var yayTextDiv = document.getElementById('yayText');
+            var questionText = document.getElementById('questionText');
+            var outsideGifsDiv = document.getElementById('outsideGifs');
+
+            questionText.innerHTML = "YAAYYYYYYYYYY";
+            document.getElementById('yesButton').style.display = 'none';
+            document.getElementById('noButton').style.display = 'none';
+            yayTextDiv.style.display = 'block';
+
+            var fallingEffectsContainer = document.getElementById('outsideGifs');
+            for (var i = 0; i < 20; i++) {
+                var fallingEffect = document.createElement('div');
+                fallingEffect.classList.add('falling-effect');
+                fallingEffect.style.left = Math.random() * (window.innerWidth - 100) + 'px'; // Subtract 100 to keep within screen bounds
+                fallingEffect.style.animationDuration = (Math.random() * 5 + 2) + 's'; // Random duration between 2s and 7s
+                fallingEffectsContainer.appendChild(fallingEffect);
+            }
+
+            // Insert your own GIFs here with different positions
+            var fireworksGif = document.createElement('img');
+            fireworksGif.src = 'https://i.gifer.com/4A5.gif'; // Fireworks GIF
+            fireworksGif.alt = 'Fireworks GIF';
+            fireworksGif.classList.add('gif-effect');
+            fireworksGif.style.left = Math.random() * (window.innerWidth - 450) + 'px'; // Subtract 350 to keep within screen bounds
+            fireworksGif.style.top = Math.random() * (window.innerHeight - 450) + 'px'; // Subtract 350 to keep within screen bounds
+            fallingEffectsContainer.appendChild(fireworksGif);
+
+            var heartsGif = document.createElement('img');
+            heartsGif.src = 'https://i.gifer.com/2GR.gif'; // Hearts GIF
+            heartsGif.alt = 'Hearts GIF';
+            heartsGif.classList.add('gif-effect');
+            heartsGif.style.left = Math.random() * (window.innerWidth - 450) + 'px'; // Subtract 350 to keep within screen bounds
+            heartsGif.style.top = Math.random() * (window.innerHeight - 450) + 'px'; // Subtract 350 to keep within screen bounds
+            fallingEffectsContainer.appendChild(heartsGif);
+        }
+    </script>
+</body>
+</html>
